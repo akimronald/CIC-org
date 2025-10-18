@@ -1,0 +1,13 @@
+{
+  "name": "davizo-backend",
+  "version": "1.0.0",
+  "description": "Minimal backend to accept orders, contact messages and applications for the Davizo site",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}

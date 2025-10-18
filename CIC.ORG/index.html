@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Davizo - Fuel and Energy Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Stylesheet.css">
+    
+    <link rel="icon" href="davizo.jpg" type="image/x-icon">
+
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md fixed w-full z-20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="davizo.jpg" alt="Davizo" class="h-10 mr-3" onerror="this.onerror=null;this.src='https://placehold.co/120x40?text=Davizo'">
+                <span class="sr-only">Davizo</span>
+            </a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="index.html" class="text-orange-600 font-semibold transition duration-300">Home</a>
+                <a href="about.html" class="text-gray-600 hover:text-orange-600 transition duration-300">About Us</a>
+                <a href="services.html" class="text-gray-600 hover:text-orange-600 transition duration-300">Services</a>
+                <a href="fuel-delivery.html" class="text-gray-600 hover:text-orange-600 transition duration-300">Fuel Delivery</a>
+                <a href="station-finder.html" class="text-gray-600 hover:text-orange-600 transition duration-300">Station Finder</a>
+                <a href="careers.html" class="text-gray-600 hover:text-orange-600 transition duration-300">Careers</a>
+                <a href="contact.html" class="text-gray-600 hover:text-orange-600 transition duration-300">Contact</a>
+            </nav>
+            <div class="md:hidden">
+                 <button id="mobile-menu-button" class="hamburger-icon focus:outline-none">
+                    <span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700"></span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="index.html" class="block py-2 px-6 text-sm hover:bg-gray-100">Home</a>
+            <a href="about.html" class="block py-2 px-6 text-sm hover:bg-gray-100">About Us</a>
+            <a href="services.html" class="block py-2 px-6 text-sm hover:bg-gray-100">Services</a>
+            <a href="fuel-delivery.html" class="block py-2 px-6 text-sm hover:bg-gray-100">Fuel Delivery</a>
+            <a href="station-finder.html" class="block py-2 px-6 text-sm hover:bg-gray-100">Station Finder</a>
+            <a href="careers.html" class="block py-2 px-6 text-sm hover:bg-gray-100">Careers</a>
+            <a href="contact.html" class="block py-2 px-6 text-sm hover:bg-gray-100">Contact</a>
+        </div>
+    </header>
+
+    <main class="pt-16">
+        <!-- Hero Banner -->
+        <section class="hero-bg text-white h-[60vh] flex items-center">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Fueling a Sustainable Journey</h1>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Satisfaction Guaranteed</h1>
+                <p class="text-lg md:text-xl mb-8">Reliable fuel, exceptional service, wherever you are.</p>
+                <a href="fuel-delivery.html" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">Order Fuel Now</a>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-8">Why Choose Davizo</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="card text-center">
+                        <i data-lucide="shield-check" class="w-10 h-10 mx-auto text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Trusted & Safe</h3>
+                        <p class="text-gray-600">We follow strict safety and quality standards across our supply chain.</p>
+                    </div>
+                    <div class="card text-center">
+                        <i data-lucide="clock" class="w-10 h-10 mx-auto text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">24/7 Availability</h3>
+                        <p class="text-gray-600">Our teams and delivery network are available whenever you need fuel.</p>
+                    </div>
+                    <div class="card text-center">
+                        <i data-lucide="map-pin" class="w-10 h-10 mx-auto text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Nationwide Coverage</h3>
+                        <p class="text-gray-600">A wide network of stations and delivery routes across the country.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--galary Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-8">Explore Our Services</h2>
+                <p class="text-3xl  text-center mb-8">visit our galary and explore more about us</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition">
+                        <img src="https://placehold.co/600x400/CCCCCC/000000?text=Fuel+Delivery" alt="Fuel Delivery" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold mb-2">On-Demand Fuel Delivery</h3>
+                            <p class="text-gray-600">Get fuel delivered directly to your location with ease and convenience.</p>
+                        </div>
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition">
+                        <img src="https://placehold.co/600x400/CCCCCC/000000?text=Station+Finder" alt="Station Finder" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold mb-2">Station Finder</h3>
+                            <p class="text-gray-600">Locate the nearest Davizo stations with our easy-to-use finder tool.</p>
+                        </div>
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition">
+                        <img src="https://placehold.co/600x400/CCCCCC/000000?text=Fleet+Services" alt="Fleet Services" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300">
+                        <div class="p-4">
+                            <h3 class="text-xl font-semibold mb-2">Fleet Services</h3>
+                            <p class="text-gray-600">Customized fuel solutions and management for your business fleet.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="text-center mb-8 bg-orange-600 text-white font-semibold py-2 px-4 rounded-r-md hover:bg-orange-700 text-3xl  ">Explore</button>
+                </div>
+            </div>
+
+        <!-- Testimonials -->
+        <section class="py-16">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-8">What Our Customers Say</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="testimonial">
+                        <p class="text-gray-700 mb-4">"Davizo saved our project timeline — fuel arrived on time and the driver was very professional."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/48x48/ccc/000?text=U" alt="User" class="w-12 h-12 rounded-full mr-3">
+                            <div>
+                                <div class="font-semibold">Michael K.</div>
+                                <div class="text-sm text-gray-500">Construction Manager</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p class="text-gray-700 mb-4">"Great customer service and clear communication. Highly recommend for on-site fuel deliveries."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/48x48/ccc/000?text=U" alt="User" class="w-12 h-12 rounded-full mr-3">
+                            <div>
+                                <div class="font-semibold">Aisha R.</div>
+                                <div class="text-sm text-gray-500">Operations Lead</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p class="text-gray-700 mb-4">"Affordable and reliable — the ordering process was simple and the discount was a nice bonus."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/48x48/ccc/000?text=U" alt="User" class="w-12 h-12 rounded-full mr-3">
+                            <div>
+                                <div class="font-semibold">Daniel O.</div>
+                                <div class="text-sm text-gray-500">Fleet Manager</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter CTA -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="newsletter max-w-3xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-1">Stay in the loop</h3>
+                        <p class="text-gray-700">Get promotions, safety tips and service updates straight to your inbox.</p>
+                    </div>
+                    <form id="subscribeForm" class="flex w-full md:w-auto">
+                        <input name="email" id="subscribeEmail" class="border border-gray-300 rounded-l-md py-2 px-4 w-full md:w-72" placeholder="Enter your email" type="email" required>
+                        <button type="submit" class="bg-orange-600 text-white font-semibold py-2 px-4 rounded-r-md hover:bg-orange-700">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Highlights -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-10">Our Core Services</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center p-6 border rounded-lg shadow-sm hover:shadow-lg transition">
+                        <i data-lucide="gas-pump" class="w-12 h-12 mx-auto text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Quality Fuels</h3>
+                        <p class="text-gray-600">Premium diesel, gasoline, and other fuel types for optimal performance.</p>
+                    </div>
+                    <div class="text-center p-6 border rounded-lg shadow-sm hover:shadow-lg transition">
+                        <i data-lucide="truck" class="w-12 h-12 mx-auto text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">On-Demand Delivery</h3>
+                        <p class="text-gray-600">Fast and convenient fuel delivery to your home, site, or business.</p>
+                    </div>
+                    <div class="text-center p-6 border rounded-lg shadow-sm hover:shadow-lg transition">
+                        <i data-lucide="car-wash" class="w-12 h-12 mx-auto text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Station Services</h3>
+                        <p class="text-gray-600">Modern stations with car wash, shops, and lubricant services.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fuel Delivery Promo -->
+        <section class="bg-orange-700 text-white">
+            <div class="container mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl font-bold mb-4">Get Fuel Delivered to Your Doorstep!</h2>
+                    <p class="mb-6">Schedule a delivery today and get 10% off your first order. Convenience and savings, delivered.</p>
+                    <a href="fuel-delivery.html" class="bg-white text-orange-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300">Schedule Delivery</a>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                     <img src="https://placehold.co/500x300/FFFFFF/000000?text=Fuel+Delivery+Truck" alt="Fuel Delivery Truck" class="rounded-lg shadow-xl">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Quick Station Search -->
+        <section class="py-16">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-4">Find a Davizo Station Near You</h2>
+                <p class="text-gray-600 mb-8">Enter your location to find the nearest station with the services you need.</p>
+                <div class="max-w-xl mx-auto">
+                    <div class="flex items-center border-2 border-gray-200 rounded-full p-2 shadow-sm">
+                        <input type="text" placeholder="Enter city or address" class="w-full bg-transparent border-none focus:ring-0 px-4">
+                        <a href="station-finder.html" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded-full">Search</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Davizo</h3>
+                    <p class="text-gray-400">Satisfaction Guaranteed.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-white">Services</a></li>
+                        <li><a href="careers.html" class="hover:text-white">Careers</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h3 class="font-semibold mb-4">Other Resources</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="news.html" class="hover:text-white">News & Updates</a></li>
+                        <li><a href="sustainability.html" class="hover:text-white">Sustainability</a></li>
+                         <li><a href="order-tracking.html" class="hover:text-white">Order Tracking</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Connect With Us</h3>
+                     <div class="flex space-x-4">
+                        <a href="#" aria-label="Davizo on Facebook"><i data-lucide="facebook" class="w-6 h-6 hover:text-orange-500"></i></a>
+                        <a href="#" aria-label="Davizo on Twitter"><i data-lucide="twitter" class="w-6 h-6 hover:text-orange-400"></i></a>
+                        <a href="#" aria-label="Davizo on LinkedIn"><i data-lucide="linkedin" class="w-6 h-6 hover:text-orange-600"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500">
+                &copy; 2025 Davizo. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 transition-opacity duration-300">
+        Message sent successfully!
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="Script.js"></script>
+</body>
+</html>
+
