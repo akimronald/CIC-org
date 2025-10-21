@@ -21,11 +21,24 @@
             <nav class="hidden md:flex space-x-6 items-center">
                 <a href="index.html" class="text-gray-600 hover:text-blue-600">Home</a>
                 <a href="blog.html" class="text-blue-600 font-semibold">Blog</a>
-                <a href="sustainability.html" class="text-gray-600 hover:text-blue-600">Sustainability</a>
-                <a href="order-tracking.html" class="text-gray-600 hover:text-blue-600">Order Tracking</a>
                 <a href="contact.html" class="text-gray-600 hover:text-blue-600">Contact</a>
             </nav>
+            <div class="md:hidden">
+                 <button id="mobile-menu-button" class="hamburger-icon focus:outline-none">
+                    <span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700"></span>
+                </button>
+            </div>
         </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="index.html" class="block py-2 px-6 text-sm hover:bg-gray-100">Home</a>
+            <a href="blog.html" class="block py-2 px-6 text-sm hover:bg-gray-100">Blog</a>
+            <a href="contact.html" class="block py-2 px-6 text-sm hover:bg-gray-100">Contact</a>   
+        </div>
+
+        
     </header>
 
     <main class="pt-20 pb-16">
