@@ -1,4 +1,4 @@
-Place your Davizo logo at `assets/davizo.png`.
+Place your Davizo logo at `assets/cic.png`.
 
 Recommended sizes:
 - 120x40 (header)
