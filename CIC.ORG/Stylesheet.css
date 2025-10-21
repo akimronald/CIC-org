@@ -70,5 +70,17 @@ footer a { color: #fbbf24; }
 @media (max-width: 768px) {
     .hero-bg { background-position: top; }
 }
-
+.hero-section {
+    background-image: linear-gradient(rgba(15,23,42,0.6), rgba(15,23,42,0.6)), url('assets/image/Education/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+    background-blend-mode: overlay;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(2,6,23,0.12);
+    width: 100%;
+    height: 100%;
+}
 
