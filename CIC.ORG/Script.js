@@ -103,4 +103,59 @@ document.addEventListener('DOMContentLoaded', () => {
             applicationFormContainer.scrollIntoView({ behavior: 'smooth' });
         }
     }
+
+    // --- Donation Form ---
+    const donationForm = document.getElementById('donationForm');
+    if (donationForm) {
+        donationForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const fd = new FormData(this);
+            const data = {};
+            for (const [k, v] of fd.entries()) data[k] = v;
+            try {
+                const resp = await fetch('/api/donate.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+                const json = await resp.json().catch(() => null);
+                if (resp.ok && json && json.success) {
+                    window.showToast('Donation successful!');
+                    this.reset();
+                } else {
+                    window.showToast((json && json.error) ? json.error : 'Failed to process donation', false);
+                }
+            } catch (err) {
+                window.showToast('Network error: could not reach API', false);
+            }
+        });
+    }
+    // payment integration can be added here
+    const paymentMethod = document.getElementById('payment-method');
+    if (paymentMethod) {
+        paymentMethod.addEventListener('change', function() {
+            const selectedMethod = this.value;
+            // Handle payment method selection
+        });
+    }
+
+    //payment means integration can be added here
+    const paymentIntegration = document.getElementById('payment-integration');
+    if (paymentIntegration) {
+        paymentIntegration.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const fd = new FormData(this);
+            const data = {};
+            for (const [k, v] of fd.entries()) data[k] = v;
+            try {
+                const resp = await fetch('/api/payment.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+                const json = await resp.json().catch(() => null);
+                if (resp.ok && json && json.success) {
+                    window.showToast('Payment successful!');
+                    this.reset();
+                } else {
+                    window.showToast((json && json.error) ? json.error : 'Failed to process payment', false);
+                }
+            } catch (err) {
+                window.showToast('Network error: could not reach API', false);
+            }
+        });
+    }
+
 });

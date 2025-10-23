@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate US - CIC</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="CIC-UG Logo.jpg" type="image/x-icon">
+
+    <style>
+        /* Custom styles integrated from the donation form and required for the overall layout */
+        :root {
+            --primary-color: #3b82f6; /* blue-500 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            padding-top: 4rem; /* Space for the fixed header */
+        }
+        .form-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+        }
+        .donation-button {
+            transition: all 0.2s ease-in-out;
+        }
+        /* Style for required fields */
+        label.required::after {
+            content: '*';
+            color: var(--primary-color);
+            margin-left: 4px;
+        }
+        /* Style for the mobile menu button */
+        .hamburger-icon span {
+            transition: all 0.3s ease;
+        }
+        
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md fixed w-full z-20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="CIC-UG Logo.jpg" alt="CIC-UG" class="h-10 mr-3 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/120x40?text=CIC-UG'">
+                <span class="sr-only">CIC-UG</span>
+            </a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="index.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
+                <!-- Highlight the current page (Donate) -->
+                <a href="services.html" class="text-blue-600 font-semibold border-b-2 border-blue-600 pb-1 transition duration-300">Donate</a>
+                <a href="about.html" class="text-gray-600 hover:text-blue-600 transition duration-300">About Us</a>
+                <a href="contact.html" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="hamburger-icon focus:outline-none" aria-label="Open mobile menu" title="Open mobile menu">
+                    <span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700 mb-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700"></span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <a href="index.html" class="block py-3 px-6 text-sm hover:bg-gray-100">Home</a>
+            <a href="services.html" class="block py-3 px-6 text-sm text-blue-600 font-semibold bg-gray-50">Donate</a>
+            <a href="about.html" class="block py-3 px-6 text-sm hover:bg-gray-100">About Us</a>
+            <a href="contact.html" class="block py-3 px-6 text-sm hover:bg-gray-100">Contact</a>
+        </div>  
+    </header>
+
+    <main class="pt-16">
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="relative w-full h-[60vh] md:h-[70vh]">
+                <img src="assets/image/hero/DSC_6169.jpg"
+                alt="Students learning on computers" 
+                class="absolute inset-0 w-full h-full object-cover">
+                
+                <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-60 text-white p-4">
+                    <div class="hero-content max-w-4xl mx-auto">
+                    <h1 class="text-5xl md:text-7xl font-extrabold text-center mb-6 md:mb-10 tracking-tight">DONATE US</h1>
+                    <p class="text-lg md:text-xl text-center px-4 md:px-0 leading-relaxed font-medium">
+                        Your generous donations help us continue our mission of empowering communities through education, technology, and sustainable development. <br>
+                        Every contribution, big or small, makes a significant impact in transforming lives and creating opportunities for those in need. <br>
+                        <span class="font-bold text-blue-300 mt-4 block">Join us in making a difference today!</span>
+                    </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Form Section (Enhanced) -->
+        <section class="py-12 md:py-20 bg-gray-50">
+            <div class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+                <div class="form-card w-full max-w-xl rounded-xl shadow-2xl overflow-hidden">
+                    <div class="p-8 md:p-10">
+                        <h2 class="text-4xl font-extrabold text-gray-800 text-center mb-4">Support Our Cause</h2>
+                        <p class="text-center text-gray-600 mb-8">Your contribution helps empower the next generation in STEM.</p>
+                        
+                        <!-- Message Box for Success/Error -->
+                        <div id="message-box" class="text-center mb-6 font-semibold min-h-[20px]"></div>
+
+                        <form id="donation-form" class="space-y-6">
+                            
+                            <!-- Full Name -->
+                            <div>
+                                <label for="name" class="required block text-sm font-medium text-gray-700">Full Name</label>
+                                <input type="text" id="name" name="name" required class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            
+                            <!-- Email Address -->
+                            <div>
+                                <label for="email" class="required block text-sm font-medium text-gray-700">Email Address</label>
+                                <input type="email" id="email" name="email" required class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            
+                            <!-- Donation Amount -->
+                            <div>
+                                <label for="amount" class="required block text-sm font-medium text-gray-700">Donation Amount (USD)</label>
+                                <div class="relative mt-1">
+                                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg font-bold">$</span>
+                                    <input type="number" id="amount" name="amount" min="1" step="0.01" required 
+                                           placeholder="e.g., 50.00"
+                                           class="block w-full border border-gray-300 rounded-lg shadow-sm p-3 pl-8 focus:ring-blue-500 focus:border-blue-500 text-lg">
+                                </div>
+                            </div>
+                            
+                            <!-- Payment Method Select -->
+                            <div>
+                                <label for="payment-method" class="required block text-sm font-medium text-gray-700">Payment Method</label>
+                                <select id="payment-method" name="payment-method" required class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500 bg-white appearance-none">
+                                    <option value="">Select how you wish to pay</option>
+                                    <option value="credit-card">Credit Card (Visa/Mastercard)</option>
+                                    <option value="mobile-money">Mobile Money (M-Pesa/Airtel)</option>
+                                    <option value="bank-transfer">Bank Transfer (Offline Instructions)</option>
+                                </select>
+                            </div>
+
+                            <!-- Dynamic Input Field (Card/Mobile Number) -->
+                            <div id="dynamic-input-container" class="space-y-1">
+                                <!-- Content will be injected here by JavaScript -->
+                            </div>
+
+                            <!-- Optional Message -->
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700">Message (Optional)</label>
+                                <textarea id="message" name="message" rows="3" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            </div>
+                            
+                            <div class="text-center pt-4">
+                                <button type="submit" id="donate-button" class="donation-button bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-12 rounded-full shadow-lg shadow-blue-500/50 hover:shadow-blue-500/70">
+                                    Donate Now
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">CIC-UG</h3>
+                    <p class="text-gray-400">Expanding Possibilities.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-white">Services</a></li>
+                        <li><a href="careers.html" class="hover:text-white">Careers</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h3 class="font-semibold mb-4">Other Resources</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">News & Updates</a></li>
+                        <li><a href="#" class="hover:text-white">Sustainability</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Connect With Us</h3>
+                     <div class="flex space-x-4">
+                        <a href="#" title="Facebook" aria-label="Facebook">
+                            <i data-lucide="facebook" class="w-6 h-6 hover:text-blue-500"></i>
+                            <span class="sr-only">Facebook</span>
+                        </a>
+                        <a href="#" title="Twitter" aria-label="Twitter">
+                            <i data-lucide="twitter" class="w-6 h-6 hover:text-blue-400"></i>
+                            <span class="sr-only">Twitter</span>
+                        </a>
+                        <a href="#" title="LinkedIn" aria-label="LinkedIn">
+                            <i data-lucide="linkedin" class="w-6 h-6 hover:text-blue-600"></i>
+                            <span class="sr-only">LinkedIn</span>
+                        </a>
+                        <a href="#" title="Instagram" aria-label="Instagram">
+                            <i data-lucide="instagram" class="w-6 h-6 hover:text-pink-500"></i>
+                            <span class="sr-only">Instagram</span>
+                        </a>   
+                        <a href="#" title="YouTube" aria-label="YouTube">
+                            <i data-lucide="youtube" class="w-6 h-6 hover:text-red-600"></i>
+                            <span class="sr-only">YouTube</span>
+                        </a>
+                        <a href="#" title="TikTok" aria-label="TikTok"> 
+                            <i data-lucide="tiktok" class="w-6 h-6 hover:text-black"></i>
+                            <span class="sr-only">TikTok</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500">
+                &copy; 2025 CIC. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <!-- STANDARD JS for UI (Mobile Menu and Icons) -->
+    <script>
+        // Initialize Lucide icons
+        window.addEventListener('load', () => {
+             // Lucide does not require a full DOMContentLoaded, but often better to wait
+             if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                lucide.createIcons();
+             }
+        });
+
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+
+    <!-- FIREBASE AND FORM LOGIC (Module setup) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // --- GLOBAL FIREBASE/APP VARIABLES (Provided by Canvas Environment) ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let app, db, auth;
+        let currentUserId = null;
+        let isFirebaseInitialized = false;
+
+        // --- FIREBASE INITIALIZATION AND AUTHENTICATION ---
+        async function initializeFirebase() {
+            try {
+                if (Object.keys(firebaseConfig).length === 0) {
+                    console.error("Firebase config is empty. Cannot initialize.");
+                    return;
+                }
+                
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUserId = user.uid;
+                        console.log("Firebase Auth Ready. User ID:", currentUserId);
+                    } else {
+                        // Use a consistent random ID if unauthenticated
+                        currentUserId = sessionStorage.getItem('tempUserId') || crypto.randomUUID();
+                        sessionStorage.setItem('tempUserId', currentUserId);
+                        console.log("Signed in anonymously. Generated temp ID:", currentUserId);
+                    }
+                    isFirebaseInitialized = true;
+                });
+            } catch (error) {
+                console.error("Error initializing Firebase or signing in:", error);
+                document.getElementById('message-box').textContent = "Error initializing the app. Check console for details.";
+                document.getElementById('message-box').classList.add('text-red-500');
+            }
+        }
+
+        // --- FORM LOGIC ---
+        const form = document.getElementById('donation-form');
+        const paymentMethodSelect = document.getElementById('payment-method');
+        const dynamicInputContainer = document.getElementById('dynamic-input-container');
+        const messageBox = document.getElementById('message-box');
+        const donateButton = document.getElementById('donate-button');
+
+        // Function to update the dynamic input field based on payment method
+        function updateDynamicInput() {
+            const method = paymentMethodSelect.value;
+            dynamicInputContainer.innerHTML = ''; // Clear previous content
+
+            let labelText, inputType, placeholder, maxLength;
+
+            if (method === 'credit-card') {
+                labelText = 'Card Number';
+                inputType = 'text';
+                placeholder = '•••• •••• •••• ••••';
+                maxLength = 19; // For spaced credit card format
+            } else if (method === 'mobile-money') {
+                labelText = 'Mobile Money Number (e.g., +256 7xxxxxxxxx)';
+                inputType = 'tel';
+                placeholder = '+256 7XXXXXXXX';
+                maxLength = 15;
+            } else {
+                return; // Do nothing if 'bank-transfer' or default is selected
+            }
+
+            const html = `
+                <label for="payment-detail" class="required block text-sm font-medium text-gray-700">${labelText}</label>
+                <input type="${inputType}" id="payment-detail" name="payment-detail" required 
+                       placeholder="${placeholder}" maxlength="${maxLength}"
+                       class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500 text-lg">
+            `;
+            dynamicInputContainer.innerHTML = html;
+        }
+
+        // Function to format credit card number as user types (improves UX)
+        function formatCreditCardNumber(event) {
+            const input = event.target;
+            let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, ''); // Remove spaces and non-digits
+            let formatted = '';
+
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formatted += ' ';
+                }
+                formatted += value[i];
+            }
+            input.value = formatted;
+        }
+
+        // Add event listeners for dynamic form changes
+        paymentMethodSelect.addEventListener('change', updateDynamicInput);
+        dynamicInputContainer.addEventListener('input', (event) => {
+            if (paymentMethodSelect.value === 'credit-card' && event.target.id === 'payment-detail') {
+                formatCreditCardNumber(event);
+            }
+        });
+        
+        // Set initial dynamic input on load
+        window.addEventListener('load', updateDynamicInput);
+
+
+        // --- FIREBASE SUBMISSION HANDLER ---
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            messageBox.textContent = '';
+            messageBox.classList.remove('text-red-500', 'text-green-500');
+            donateButton.disabled = true;
+            donateButton.textContent = 'Processing...';
+
+            if (!isFirebaseInitialized) {
+                messageBox.textContent = "App is still connecting to the database. Please wait a moment.";
+                messageBox.classList.add('text-red-500');
+                donateButton.disabled = false;
+                donateButton.textContent = 'Donate Now';
+                return;
+            }
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // Basic validation for credit card
+            if (data['payment-method'] === 'credit-card' && (!data['payment-detail'] || data['payment-detail'].replace(/\s/g, '').length !== 16)) {
+                messageBox.textContent = "Please enter a valid 16-digit credit card number.";
+                messageBox.classList.add('text-red-500');
+                donateButton.disabled = false;
+                donateButton.textContent = 'Donate Now';
+                return;
+            }
+
+            // If bank transfer is selected, we don't save the detail but show offline message
+            if (data['payment-method'] === 'bank-transfer') {
+                messageBox.innerHTML = `Thank you! For Bank Transfer, please use the following details: <br> <strong>Bank Name: XYZ Bank, Account No: 123456789, SWIFT: ABCDEFGH</strong>. We appreciate your support.`;
+                messageBox.classList.add('text-blue-600');
+                form.reset();
+                updateDynamicInput();
+                donateButton.disabled = false;
+                donateButton.textContent = 'Donate Now';
+                return;
+            }
+
+
+            // Construct the donation object to save
+            const donationRecord = {
+                donorName: data.name,
+                donorEmail: data.email,
+                amount: parseFloat(data.amount),
+                paymentMethod: data['payment-method'],
+                paymentDetail: data['payment-detail'] || 'N/A', 
+                message: data.message || '',
+                date: new Date().toISOString(),
+                userId: currentUserId,
+            };
+
+            try {
+                // Use a public collection for shared/fundraising data
+                const donationsCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'donations');
+                
+                // Add the document to Firestore
+                const docRef = await addDoc(donationsCollectionRef, donationRecord);
+                
+                messageBox.textContent = `Thank you for your generous donation of $${data.amount}! Your record has been saved.`;
+                messageBox.classList.add('text-green-500');
+                
+                form.reset(); // Clear the form on success
+                updateDynamicInput(); // Clear the dynamic field
+            } catch (error) {
+                console.error("Error submitting donation:", error);
+                messageBox.textContent = "An error occurred during submission. Please check your connection and try again.";
+                messageBox.classList.add('text-red-500');
+            } finally {
+                donateButton.disabled = false;
+                donateButton.textContent = 'Donate Now';
+            }
+        });
+
+        // Initialize Firebase on load
+        window.onload = initializeFirebase;
+    </script>
+</body>
+</html>
