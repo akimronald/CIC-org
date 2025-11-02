@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/config.php';
 
+header('Content-Type: application/json');
 // POST /api/orders.php -> create order
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -8,10 +9,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$data = read_json_body();
-if (!$data) {
+// Accept JSON or form posts
+$raw = file_get_contents('php://input');
+$data = $raw ? json_decode($raw, true) : [];
+if (empty($data) && !empty($_POST)) {
+    $data = $_POST;
+}
+
+if (empty($data)) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'error' => 'Invalid JSON']);
+    echo json_encode(['success' => false, 'error' => 'Missing form data']);
     exit;
 }
 
@@ -21,16 +28,21 @@ try {
     $stmt->execute([
         $data['name'] ?? null,
         $data['phone'] ?? null,
-        $data['fuelType'] ?? null,
+        $data['fuelType'] ?? ($data['fuel_type'] ?? null),
         isset($data['liters']) ? $data['liters'] : null,
         isset($data['latitude']) ? $data['latitude'] : null,
         isset($data['longitude']) ? $data['longitude'] : null,
         $data['address'] ?? null,
-        $data['payment'] ?? null,
+        $data['payment'] ?? ($data['payment_method'] ?? null),
     ]);
-    $id = $pdo->lastInsertId();
+    $id = (int)$pdo->lastInsertId();
     http_response_code(201);
-    echo json_encode(['success' => true, 'order' => array_merge(['id' => (int)$id], $data)]);
+    echo json_encode(['success' => true, 'order' => array_merge(['id' => $id], [
+        'name' => $data['name'] ?? null,
+        'phone' => $data['phone'] ?? null,
+        'fuel_type' => $data['fuelType'] ?? ($data['fuel_type'] ?? null),
+        'liters' => isset($data['liters']) ? $data['liters'] : null,
+    ])]);
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['success' => false, 'error' => 'Failed to save order', 'detail' => $e->getMessage()]);

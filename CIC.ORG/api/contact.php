@@ -1,16 +1,23 @@
 <?php
 require_once __DIR__ . '/config.php';
 
+header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'error' => 'Method not allowed']);
     exit;
 }
 
-$data = read_json_body();
-if (!$data) {
+// Accept JSON or form POSTS
+$raw = file_get_contents('php://input');
+$data = $raw ? json_decode($raw, true) : [];
+if (empty($data) && !empty($_POST)) {
+    $data = $_POST;
+}
+
+if (empty($data)) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'error' => 'Invalid JSON']);
+    echo json_encode(['success' => false, 'error' => 'Missing form data']);
     exit;
 }
 

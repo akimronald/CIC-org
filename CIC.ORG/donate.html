@@ -198,7 +198,7 @@
                             <span class="sr-only">Facebook</span>
                         </a>
                         <a href="#" title="Twitter" aria-label="Twitter">
-                            <i data-lucide="twitter" class="w-6 h-6 hover:text-blue-400"></i>
+                            <i data-lucide="X" class="w-6 h-6 hover:text-blue-400"></i>
                             <span class="sr-only">Twitter</span>
                         </a>
                         <a href="#" title="LinkedIn" aria-label="LinkedIn">
@@ -373,28 +373,21 @@
             donateButton.disabled = true;
             donateButton.textContent = 'Processing...';
 
-            if (!isFirebaseInitialized) {
-                messageBox.textContent = "App is still connecting to the database. Please wait a moment.";
-                messageBox.classList.add('text-red-500');
-                donateButton.disabled = false;
-                donateButton.textContent = 'Donate Now';
-                return;
-            }
-
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
-            // Basic validation for credit card
-            if (data['payment-method'] === 'credit-card' && (!data['payment-detail'] || data['payment-detail'].replace(/\s/g, '').length !== 16)) {
-                messageBox.textContent = "Please enter a valid 16-digit credit card number.";
+            // Basic validation
+            const amount = parseFloat(data.amount || 0);
+            if (!amount || amount <= 0) {
+                messageBox.textContent = 'Please enter a valid donation amount.';
                 messageBox.classList.add('text-red-500');
                 donateButton.disabled = false;
                 donateButton.textContent = 'Donate Now';
                 return;
             }
 
-            // If bank transfer is selected, we don't save the detail but show offline message
             if (data['payment-method'] === 'bank-transfer') {
+                // Offline bank instructions — don't redirect
                 messageBox.innerHTML = `Thank you! For Bank Transfer, please use the following details: <br> <strong>Bank Name: XYZ Bank, Account No: 123456789, SWIFT: ABCDEFGH</strong>. We appreciate your support.`;
                 messageBox.classList.add('text-blue-600');
                 form.reset();
@@ -404,31 +397,60 @@
                 return;
             }
 
+            // For credit-card or mobile-money, attempt server-side redirect (PayPal fallback). If server doesn't provide redirect, fall back to saving locally in Firestore
+            if (data['payment-method'] === 'credit-card' || data['payment-method'] === 'mobile-money') {
+                try {
+                    const resp = await fetch('/api/create_checkout.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            amount: amount,
+                            name: data.name,
+                            email: data.email,
+                            paymentMethod: data['payment-method']
+                        })
+                    });
+                    const json = await resp.json();
+                    if (json && json.success && json.redirect_url) {
+                        // Redirect the browser to the hosted payment page
+                        window.location.href = json.redirect_url;
+                        return;
+                    } else {
+                        console.warn('create_checkout did not return redirect_url, falling back to Firestore save', json);
+                    }
+                } catch (err) {
+                    console.error('Error calling create_checkout:', err);
+                }
+            }
+
+            // Fallback: save the donation record in Firestore (existing behavior)
+            if (!isFirebaseInitialized) {
+                messageBox.textContent = "App is still connecting to the database. Please wait a moment.";
+                messageBox.classList.add('text-red-500');
+                donateButton.disabled = false;
+                donateButton.textContent = 'Donate Now';
+                return;
+            }
 
             // Construct the donation object to save
             const donationRecord = {
                 donorName: data.name,
                 donorEmail: data.email,
-                amount: parseFloat(data.amount),
+                amount: amount,
                 paymentMethod: data['payment-method'],
-                paymentDetail: data['payment-detail'] || 'N/A', 
+                paymentDetail: data['payment-detail'] || 'N/A',
                 message: data.message || '',
                 date: new Date().toISOString(),
                 userId: currentUserId,
             };
 
             try {
-                // Use a public collection for shared/fundraising data
                 const donationsCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'donations');
-                
-                // Add the document to Firestore
                 const docRef = await addDoc(donationsCollectionRef, donationRecord);
-                
-                messageBox.textContent = `Thank you for your generous donation of $${data.amount}! Your record has been saved.`;
+                messageBox.textContent = `Thank you for your generous donation of $${amount.toFixed(2)}! Your record has been saved.`;
                 messageBox.classList.add('text-green-500');
-                
-                form.reset(); // Clear the form on success
-                updateDynamicInput(); // Clear the dynamic field
+                form.reset();
+                updateDynamicInput();
             } catch (error) {
                 console.error("Error submitting donation:", error);
                 messageBox.textContent = "An error occurred during submission. Please check your connection and try again.";

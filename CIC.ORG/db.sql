@@ -1,6 +1,6 @@
--- SQL schema for Davizo backend
-CREATE DATABASE IF NOT EXISTS davizo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE davizo;
+-- SQL schema for CIC-ORG backend (updated to match site)
+CREATE DATABASE IF NOT EXISTS cic_org CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE cic_org;
 
 CREATE TABLE IF NOT EXISTS orders (
   id INT AUTO_INCREMENT PRIMARY KEY,

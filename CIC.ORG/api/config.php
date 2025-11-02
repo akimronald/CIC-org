@@ -1,9 +1,12 @@
 <?php
 // Database configuration. You can override these with environment variables.
+// NOTE: change these environment variables in production or set in your PHP-FPM/Apache config.
 $db_host = getenv('DB_HOST') ?: '127.0.0.1';
-$db_name = getenv('DB_NAME') ?: 'davizo';
+$db_name = getenv('DB_NAME') ?: 'cic_org'; // default DB matching this project
 $db_user = getenv('DB_USER') ?: 'root';
 $db_pass = getenv('DB_PASS') ?: '';
+// Optional PayPal business email for donations. Set PAYPAL_BUSINESS in env to enable server-side PayPal redirects.
+$paypal_business = getenv('PAYPAL_BUSINESS') ?: 'donations@example.com';
 
 try {
     $dsn = "mysql:host=$db_host;dbname=$db_name;charset=utf8mb4";
